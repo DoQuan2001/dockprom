@@ -1,11 +1,11 @@
 route:
-    receiver: 'slack'
+  group_by: ['alertname']
+  group_wait: 10s     
+  receiver: 'telegram_receiver'
 
 receivers:
-    - name: 'slack'
-      slack_configs:
-          - send_resolved: true
-            text: "{{ .CommonAnnotations.description }}"
-            username: 'Prometheus'
-            channel: '#<channel-name>'
-            api_url: 'https://hooks.slack.com/services/<webhook-id>'
+- name: 'telegram_receiver'
+  telegram_configs:
+  - api_url: 'https://api.telegram.org'
+    bot_token: 'token vừa nãy ở bước 1'
+    chat_id: cái id của group ở bước 3
